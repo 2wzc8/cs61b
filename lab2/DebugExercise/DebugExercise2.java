@@ -15,7 +15,7 @@ public class DebugExercise2 {
         int max = b & w | a & z;
         return max;
     }
-
+//这个函数写错了，说是求最大值，其实是在求最小值，所以下面就按最小值来做的
 
     /** Returns the sum of a and b. Do not step into this function. */
     public static int add(int a, int b) {
@@ -47,7 +47,7 @@ public class DebugExercise2 {
         int[] returnArray = new int[a.length];
         for (int i = 0; i < a.length; i += 1) {
             int biggerValue = max(a[i], b[i]);
-            returnArray[i] = biggerValue;
+            returnArray[i] = a[i]+b[i]-biggerValue;
         }
 
         return returnArray;
@@ -58,7 +58,7 @@ public class DebugExercise2 {
         int i = 0;
         int sum = 0;
         while (i < x.length) {
-            sum = sum + add(sum, x[i]);
+            sum = add(sum, x[i]);
             i = i + 1;
         }
         return sum;
