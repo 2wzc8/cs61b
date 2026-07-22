@@ -69,21 +69,13 @@ public class LinkedListDeque<Item> {
         return size;
     }
     public Item get(int i){
+        if(i<0||i>size-1){
+            return null;
+        }
         ItemNode p = fronsent.next;
-        if(i==0){
-            return null;
-        }
         while(i>0){
-            if(p.next!=backsent){
-                p = p.next;
-            }
-            if(p.next==backsent){
-                break;
-            }
-            i -= 1;
-        }
-        if(i!=0){
-            return null;
+            p = p.next;
+            i-=1;
         }
         return p.item;
     }

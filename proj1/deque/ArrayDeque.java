@@ -53,6 +53,7 @@ public class ArrayDeque<Item> {
         for(int i=0;i<size-1;i++){
             items[i]=items[i+1];
         }
+        items[size-1]=null;
         size-=1;
         return k;
     }
@@ -78,7 +79,7 @@ public class ArrayDeque<Item> {
         if(this.size()!=o.size()){
             return false;
         }
-        for(int i==;i<this.size();i++){
+        for(int i=0;i<this.size();i++){
             if(this.get(i)!=o.get(i)){
                 return false;
             }
