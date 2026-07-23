@@ -1,6 +1,8 @@
 package deque;
 
-public class LinkedListDeque<Item> {
+import java.util.Iterator;
+
+public class LinkedListDeque<Item> implements Deque<Item>{
     private class ItemNode{
         public Item item;
         public  ItemNode next;
@@ -91,9 +93,6 @@ public class LinkedListDeque<Item> {
         }
         return getRecursiveHelper(node.next, i - 1);
     }
-    public boolean isEmpty(){
-        return size==0;
-    }
     public void printDeque(){
         ItemNode p = fronsent.next;
         while(p!=backsent){
@@ -107,17 +106,35 @@ public class LinkedListDeque<Item> {
             }
         }
     }
-    //public Iterator<Item> iterator(){
-//lecture 11 才讲，还没看到
-    //}
-    public boolean equals(LinkedListDeque O){
-        if(this.size()!=O.size()){
-            return false;
+    private class DequeIterator implements Iterator<Item>{
+        private ItemNode current = fronsent.next;
+        public boolean hasNext(){
+            return current != backsent;
         }
-        ItemNode p = this.fronsent.next;
-        ItemNode o = O.fronsent.next;
-        while(p!=this.backsent&&o!=O.backsent){
-            if(p.item!=o.item){
+        public Item next(){
+            Item item = current.item;
+            current = current.next;
+            return item;
+        }
+    }
+    public Iterator<Item> iterator(){
+        return new DequeIterator();
+    }
+    @Override
+    public boolean equals(Object O){
+        if(O==null) return false;
+        if(this==O) return true;
+        if(!(O instanceof LinkedListDeque<?>)) return false;
+        LinkedListDeque<?> other = (LinkedListDeque<?>) O;
+        if(this.size()!=other.size()) return false;
+        Iterator<Item> it1 = this.iterator();
+        Iterator<?> it2 = other.iterator();
+        while(it1.hasNext()){
+            Item a = it1.next();
+            Object b = it2.next();
+            if(a==null){
+                if(b!=null) return false;
+            }else if(!a.equals(b)){
                 return false;
             }
         }
